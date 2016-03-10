@@ -1,9 +1,9 @@
-var clientUDP = network.clientUDP(global.infoGame.portMulticast);
+var clientUDP = network.clientUDP(global.infoGame.udp);
 var template = _.template($('#room-template').html());
 var rooms = [];
 
 clientUDP.on('message',function(message,remote){
-        console.log('message receive: ' + message + 'remote to: ' +remote.address);
+        console.log('Mensaje recibido: ' + message + 'remote to: ' +remote.address);
         var packet;
         try{
              packet =  JSON.parse(message);
@@ -36,11 +36,8 @@ $('.btn-floating').on('click',function(ev){
         global.infoGame.hostAddress = address;
         global.infoGame.roomName = element.attr('data-roomName');
         clientUDP.close();
-       // window.location.href = '../app/clientGame.html';
+        window.location.href = '../html/jugarCliente.html';
     }else{
         alert('Debe seleccionar una sala para jugar.');
     }
 });
-
-
-

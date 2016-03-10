@@ -5,17 +5,17 @@ $('#submit').on('click',function(ev){
 	var ipbroadcast = $('#broadcast');
 	var ipmulticast = $('#ipmulticast');
 	var portmulticast = $('#portmulticast');
-	var time = $('#tiempo');
+	var tiempo = $('#tiempo');
 	if(udp.val() === '' || tcp.val() === '' || ipbroadcast.val() === '' ||
-		ipmulticast.val() === '' || portmulticast.val() === '' || time.val() === ''){
+		ipmulticast.val() === '' || portmulticast.val() === '' || tiempo.val() === ''){
 		alert('No puede dejar un campo vacío');
 	}else{
-		global.infoGame.UDP					= Number($("#udp").val());
-		global.infoGame.TCP					= Number($("#tcp").val());
-		global.infoGame.ipBroadcast			= $('#broadcast').val();
-		global.infoGame.ipMulticast			= $('#ipmulticast').val();
-		global.infoGame.portMulticast		= Number($('#portmulticast').val());
-		global.infoGame.TIME				= Number($('#tiempo').val());
+		global.infoGame.udp					= Number($("#udp").val());
+		global.infoGame.tcp					= Number($("#tcp").val());
+		global.infoGame.ipbroadcast			= $('#broadcast').val();
+		global.infoGame.ipmulticast			= $('#ipmulticast').val();
+		global.infoGame.portmulticast		= Number($('#portmulticast').val());
+		global.infoGame.tiempo				= Number($('#tiempo').val());
 		console.log(global.infoGame);
 		window.location.href = '../html/index.html';
 	}

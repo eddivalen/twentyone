@@ -16,3 +16,12 @@
 	color: #fff;
 	margin-top: 10px;
 }
+.img_juego{
+	background: transparent url("../images/table1.png");
+	margin:0 auto;
+	position: relative;
+	width: 1000px;
+	height: 550px;
+	border-radius: 5px;
+	margin-bottom: 20px;
+}

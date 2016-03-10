@@ -3,7 +3,7 @@ var roomName;
 var tiempo;
 var espacios;
 var intervalToAnnounce;
-var port = global.infoGame.UDP;  
+var port = global.infoGame.udp;  
 console.log(ip);
 
 $('#crearSala').on('click',function( ev ){
@@ -15,12 +15,12 @@ $('#crearSala').on('click',function( ev ){
         roomName = element.val();
         global.infoGame.ip = ip;
         global.infoGame.roomName = roomName;
-        global.infoGame.TIME = tiempo;
+        global.infoGame.tiempo = tiempo;
         global.infoGame.espacios = espacios;
         console.log(roomName);
         console.log(global.infoGame);
         announceRoom(ip,roomName,tiempo,espacios);
-        //window.location.href = "../html/servidor.html";
+        window.location.href = "../html/servidor.html";
     }
 });
 function announceRoom(ip , room, time, space){
@@ -33,7 +33,7 @@ function announceRoom(ip , room, time, space){
 
     intervalToAnnounce = setInterval(function(){
                 network.serverUDP(message,port);
-    }, 1000*tiempo);
+    }, 1);
 
      var data = {
         type: 'alert-success',
@@ -42,6 +42,3 @@ function announceRoom(ip , room, time, space){
     };
     alert('El servidor se esta anunciando en el puerto:'+port+' ');
 }
-
-
-

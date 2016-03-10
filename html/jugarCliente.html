@@ -3,41 +3,46 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-    <title>Nuevo jugador</title>
+    <title>BlackJack</title>
     <!-- CSS  -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="../css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     <link href="../css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  </head>
 
-<body class"green">
+</head>
   <nav class="black" role="navigation">
     <div class="nav-wrapper container">
         <img src="../images/mini2.png" alt="" class="circle responsive-img">
         <a id="logo-container" href="index.html" class="brand-logo">Twenty One</a>
-        <a class="white-text right">Crear Jugador</a>
+        <a class="white-text right">Sala de Juego</a>
         <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons"></i></a>
     </div>
   </nav>
 
-    <div class="container">
-      <div class="row center">
-          <form action="#">
-            <div class="row">
-                <h4>Nombre:</h4>
-                <div class="col s4 offset-s4">
-                  <input placeholder="" id="nombreJugador" type="text" class="validate">   
-                </div>    
-            </div>
-            <div class="row">
-              <button id="unirJugador" class="btn waves-effect waves-light red" type="submit" name="action">Ingresar
-              <i class="material-icons right">send</i>
-              </button>
-            </div>  
-          </form>    
+  <body>
+    <div class="row img_juego">
+      <div id="juego">
+        <div class="" id="dealer">
+          <div class="" id="mano_d"></div>  
+        </div>
+        <div class="" id="jugador">
+          <div class="" id="mano_j"></div>  
+        </div>
+        <div class="" id="dinero">
+          <div class="" id="total_dinero"></div>
+          <div class="" id="ganancia"></div>
+        </div>
       </div>
     </div>
-  </div>
+
+    <div class="row center">
+      <button id="repartir" class="btn waves-effect waves-light red" type="submit" name="action">Repartir
+      </button>
+      <button id="peir" class="btn waves-effect waves-light red" type="submit" name="action">Pedir
+      </button>
+      <button id="repartir" class="btn waves-effect waves-light red" type="submit" name="action">Quedarse
+      </button>
+    </div>
 
   <footer class="page-footer">
     <div class="row center marg">
@@ -46,13 +51,12 @@
         <a class="white-text">Nelson Zambrano</a></li>
     </div>
   </footer>
-
-</body>
   <!--  Scripts-->
-  <script src="../js/vendor/jquery-2.1.1.min.js"></script>
+   <script src="../js/vendor/jquery-2.1.1.min.js"></script>
   <script src="../js/vendor/underscore.min.js"></script>
   <script src="../js/materialize.js"></script>
   <script src="../js/network.js"></script>
-  <script src="../js/nuevo_jugador.js"></script>
-
+  <script src="../js/jugarCliente.js"></script>
+     
+  </body>
 </html>

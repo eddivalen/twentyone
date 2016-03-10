@@ -1,3 +1,7 @@
+var ipbroadcast = global.infoGame.ipbroadcast;
+var ipmulticast = global.infoGame.ipmulticast;
+var udp = global.infoGame.udp;
+
 var network = {
     net : require('net'),
     dgram: require('dgram'),
@@ -8,7 +12,7 @@ var network = {
     serverUDP : function(json,port){
         var dgram = this.dgram;
         var PORT = port;
-        var HOST = '255.255.255.255';
+        var HOST = ipbroadcast;
         var server = dgram.createSocket('udp4');
         var message = new Buffer(JSON.stringify(json));
         server.bind(function(){
@@ -31,16 +35,13 @@ var network = {
         client.on('listening',function(){
             console.log("Server on listening:"+ HOST + ' Port:' + PORT);
         });
-
-
         client.bind(PORT,HOST);
         return client;
     },
 
     clientTCP : function(port,host){
-        var net = this.net;
+        var net = this.net;      
         var client = new net.Socket();
-
         client.connect(port,host,function(){
             console.log('connected to: ' + host + ' ' + port);
         });
@@ -50,10 +51,10 @@ var network = {
     multicast : function(multicastPort){
         var dgram = this.dgram;
         var PORT = multicastPort;
-        var multicastAddress = '239.1.2.3';
+        var multicastAddress = ipmulticast;
         var server = dgram.createSocket('udp4');
         //The port bind should be changed
-        server.bind(5555,'0.0.0.0',function(){
+        server.bind(udp,'0.0.0.0',function(){
             server.setBroadcast(true);
             server.setMulticastTTL(128);
             server.addMembership(multicastAddress);
