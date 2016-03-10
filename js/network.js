@@ -22,15 +22,14 @@ var network = {
         server.send(message,0,message.length,PORT,HOST,function (err) {
             if (err) throw err;
             console.log('Message UDP sended to: ' + HOST + ' Port: ' + PORT);
-            server.close();
+            //server.close();
         });
     },
-
+    
     clientUDP: function (port){
         var dgram = this.dgram;
         var client = dgram.createSocket('udp4');
         var PORT = port;
-        /*var HOST = '255.255.255.255';*/
         var HOST = '0.0.0.0';
         client.on('listening',function(){
             console.log("Server on listening:"+ HOST + ' Port:' + PORT);

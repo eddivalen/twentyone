@@ -1,5 +1,5 @@
 var ip = global.infoGame.ip;
-var port = global.infoGame.tcp;
+var port = global.infoGame.udp;
 var time = global.infoGame.tiempo;
 var roomName = global.infoGame.roomName;
 var gameID = global.infoGame.gameID = ip;
@@ -9,9 +9,10 @@ var intervalToAnnounce;
 var intervalMulticast;
 var sendMulticast;
 
+crear.announceRoom(global.infoGame.roomName,global.infoGame.tiempo,global.infoGame.espacios);
+
 (function startServer(){
     var server = network.net.createServer(function(client){
-
         console.log('client connected');
 
         client.on('data',function(data){
@@ -25,13 +26,11 @@ var sendMulticast;
                         return typeof(users.sock.localAddress) === 'undefined';
                     });
             removePlayer(user);
-            //check if an error occurs
             delete user.sock;
             var index = users.indexOf(user);
             users.splice(index, 1);
         });
     });
-
     server.listen(port,function(){
         console.log('Server listening');
     });
