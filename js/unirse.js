@@ -34,7 +34,7 @@ $('.btn-floating').on('click',function(ev){
    // console.log(ev);
     if(typeof(address) != 'undefined'){
         global.infoGame.hostAddress = address;
-        global.infoGame.roomName = element.attr('data-roomName');
+        global.infoGame.roomNamec = element.attr('data-roomName');
         clientUDP.close();
         window.location.href = '../html/jugarCliente.html';
     }else{

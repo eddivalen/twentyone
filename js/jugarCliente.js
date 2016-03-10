@@ -25,31 +25,25 @@ function requestConnection(){
     console.log(data);
     client.write(JSON.stringify(data));
 }
+
 function handleData(data){
     switch(data.codigo){
         case 3:
             handleGameID(data);
             break;
         case 103:
-           // console.log(data.NUMEROS);
-        //    handleCards(data);
             break;
         case 5:   
             alert('Ha comenzado el juego.');
-            //toastr["success"]("","Ha comenzado el juego");
             break;
         case 10:
             alert('Ha finaliado el juego.');
-            //toastr["info"]("","Ha finalizado el juego");
             break;
         case 308:
-           // handleNumbers(data);
             break;
         case 302:
-           // toastr["info"]("","Un cliente ha cantado bingo");
             break;
         case 307:
-           // toastr["info"]("Ganador : " +data.CLIENTE+ " con un " + data.TIPOBINGO,"El Servidor Acepto el BINGO");
             break;
     }
 }
