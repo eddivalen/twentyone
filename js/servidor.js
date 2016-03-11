@@ -1,5 +1,5 @@
-var ip = global.infoGame.ip;
-var port = global.infoGame.udp;
+var ip = network.getMyIp();
+var port = global.infoGame.tcp;
 var time = global.infoGame.tiempo;
 var roomName = global.infoGame.roomName;
 var gameID = global.infoGame.gameID = ip;
@@ -8,8 +8,28 @@ var bingoNumbers = [];
 var intervalToAnnounce;
 var intervalMulticast;
 var sendMulticast;
+var template = _.template($('#players-template').html());
+var ipcliente;
+var cantidad_jug = global.infoGame.espacios;
 
-crear.announceRoom(global.infoGame.roomName,global.infoGame.tiempo,global.infoGame.espacios);
+announceRoom(global.infoGame.roomNames,global.infoGame.tiempo,cantidad_jug,global.infoGame.udp);
+    function announceRoom(room, time, space, port){
+        var message = {
+            'codigo': 1,
+            'nombre': room,
+            'tiempo': time,
+            'espacios': space
+        };
+        console.log('espacios:'+message.espacios);
+        intervalToAnnounce = setInterval(function(){
+                network.serverUDP(message,port);
+        }, 1000*global.infoGame.tiempo);
+        var data = {
+            type: 'alert-success',
+            message: 'El servidor se esta Anunciando.',
+            description: 'En el puerto: ' + port
+        };
+    }
 
 (function startServer(){
     var server = network.net.createServer(function(client){
@@ -34,7 +54,6 @@ crear.announceRoom(global.infoGame.roomName,global.infoGame.tiempo,global.infoGa
     server.listen(port,function(){
         console.log('Server listening');
     });
-
     function handleData( data , sock ) {
 
         switch(data.codigo){
@@ -64,23 +83,37 @@ crear.announceRoom(global.infoGame.roomName,global.infoGame.tiempo,global.infoGa
 
         console.log(sock.remoteAddress);
         //render.Player(data);
-
-        var response ={
-            'codigo' : 3,
-            'aceptado' : true,
-            'direccion':ip,
-            'id' : gameID
-        };
-
+        
+        if(global.infoGame.espacios == 0){
+            var response ={
+                'codigo' : 3,
+                'aceptado' : false,
+                'direccion': null,
+                'id' : null
+            };
+        }else{
+            var response ={
+                'codigo' : 3,
+                'aceptado' : true,
+                'direccion':ip,
+                'id' : 'SERVIDOR_EDDY'
+            };
+            cantidad_jug =  cantidad_jug - 1;
+            console.log('espacios: '+cantidad_jug);
+            
+            global.infoGame.espacios = cantidad_jug;
+        }
         sock.write(JSON.stringify(response));
+        ipcliente = sock.remoteAddress;
+        ipcliente = ipcliente.replace("::ffff:"," ");
+        console.log(ipcliente);
+        clearInterval(intervalToAnnounce);
+        announceRoom(global.infoGame.roomNames,global.infoGame.tiempo,cantidad_jug,global.infoGame.udp);
+        $('#players').append(template(data));
         users.push({
-            playerName: json.nombre,
-            ip: sock.remoteAddress,
-            sock: sock,
-            cards : []
+            ip: ipcliente,
+            playerName: json.nombre
         });
-
-
     }
     function parseJSON( json ){
         try{

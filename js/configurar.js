@@ -16,6 +16,7 @@ $('#submit').on('click',function(ev){
 		global.infoGame.ipmulticast			= $('#ipmulticast').val();
 		global.infoGame.portmulticast		= Number($('#portmulticast').val());
 		global.infoGame.tiempo				= Number($('#tiempo').val());
+		global.infoGame.espacios = 4;
 		console.log(global.infoGame);
 		window.location.href = '../html/index.html';
 	}
