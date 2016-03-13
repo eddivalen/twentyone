@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 var ip = global.infoGame.ipmulticast;
+=======
+var ip = network.getMyIp();
+>>>>>>> origin/master
 var port = global.infoGame.tcp;
 var time = global.infoGame.tiempo;
 var roomName = global.infoGame.roomName;
@@ -13,7 +17,10 @@ var sendMulticast;
 var template = _.template($('#players-template').html());
 var ipcliente;
 var cantidad_jug = global.infoGame.espacios;
+<<<<<<< HEAD
 var pos;
+=======
+>>>>>>> origin/master
 
 announceRoom(global.infoGame.roomNames,global.infoGame.tiempo,cantidad_jug,global.infoGame.udp);
     function announceRoom(room, time, space, port){
@@ -77,9 +84,23 @@ announceRoom(global.infoGame.roomNames,global.infoGame.tiempo,cantidad_jug,globa
                 break;
         }
     }
+<<<<<<< HEAD
     function responseConnection( json, sock ){        
         if(global.infoGame.espacios <= 0){
           
+=======
+    function responseConnection( json, sock ){
+
+        data = {
+            playerName : json.nombre,
+            ip : sock.remoteAddress,
+        };
+
+        console.log(sock.remoteAddress);
+        //render.Player(data);
+        
+        if(global.infoGame.espacios == 0){
+>>>>>>> origin/master
             var response ={
                 'codigo' : 3,
                 'aceptado' : false,
@@ -87,6 +108,7 @@ announceRoom(global.infoGame.roomNames,global.infoGame.tiempo,cantidad_jug,globa
                 'id' : null
             };
         }else{
+<<<<<<< HEAD
               idcliente = (cant + 1) - cantidad_jug;
               console.log('idcliente: '+idcliente);
                 var response ={
@@ -120,6 +142,30 @@ announceRoom(global.infoGame.roomNames,global.infoGame.tiempo,cantidad_jug,globa
                 playerName: json.nombre
             });
         }
+=======
+            var response ={
+                'codigo' : 3,
+                'aceptado' : true,
+                'direccion':ip,
+                'id' : 'SERVIDOR_EDDY'
+            };
+            cantidad_jug =  cantidad_jug - 1;
+            console.log('espacios: '+cantidad_jug);
+            
+            global.infoGame.espacios = cantidad_jug;
+        }
+        sock.write(JSON.stringify(response));
+        ipcliente = sock.remoteAddress;
+        ipcliente = ipcliente.replace("::ffff:"," ");
+        console.log(ipcliente);
+        clearInterval(intervalToAnnounce);
+        announceRoom(global.infoGame.roomNames,global.infoGame.tiempo,cantidad_jug,global.infoGame.udp);
+        $('#players').append(template(data));
+        users.push({
+            ip: ipcliente,
+            playerName: json.nombre
+        });
+>>>>>>> origin/master
     }
     function parseJSON( json ){
         try{
