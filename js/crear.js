@@ -20,22 +20,3 @@ $('#crearSala').on('click',function( ev ){
         window.location.href = "../html/servidor.html";
     }
 });
-
-var crear = {
-    announceRoom : function(room, time, space){
-        var message = {
-            'codigo': 1,
-            'nombre': room,
-            'tiempo': time,
-            'espacios': space
-        };
-        intervalToAnnounce = setInterval(function(){
-                network.serverUDP(message,port);
-        }, 1000*tiempo);
-        var data = {
-            type: 'alert-success',
-            message: 'El servidor se esta Anunciando.',
-            description: 'En el puerto: ' + port
-        };
-    }
-};

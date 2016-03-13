@@ -1,15 +1,16 @@
 var ip = network.getMyIp();
-var port = global.infoGame.tcp;
+console.log(ip);
+var portTCP = global.infoGame.tcp;
 var host = global.infoGame.hostAddress;
 var ipmulticast = global.infoGame.ipmulticast;
+var portmulticast = global.infoGame.portmulticast;
 var upd = global.infoGame.udp;
-var client = network.clientTCP(port,host);
-var myCards = [];
+var client = network.clientTCP(portTCP,host);
+var jugadores = [];
 var gameID;
-console.log('Host: '+host+' Puerto: '+ port);
+console.log('Host: '+host+' Puerto: '+ portTCP);
 
-
-requestConnection();
+hearMulticast(portmulticast);
 
 client.on('data',function(data){
     console.log(data.toString());
@@ -17,19 +18,10 @@ client.on('data',function(data){
     handleData(message);
 });
 
-function requestConnection(){
-    data = {
-        'codigo' : 2,
-        'nombre' : global.infoGame.playerName
-    };
-    console.log(data);
-    client.write(JSON.stringify(data));
-}
-
 function handleData(data){
     switch(data.codigo){
-        case 3:
-            handleGameID(data);
+        case 4:
+            presentacionJuego(data);
             break;
         case 103:
             break;
@@ -37,7 +29,7 @@ function handleData(data){
             alert('Ha comenzado el juego.');
             break;
         case 10:
-            alert('Ha finaliado el juego.');
+            alert('Ha finalizado el juego.');
             break;
         case 308:
             break;
@@ -47,10 +39,8 @@ function handleData(data){
             break;
     }
 }
-function handleGameID(data){
-    gameID = data.id;
-    console.log('Se ha unido al juego con id: ' + data.id);
-    hearMulticast(upd);
+function presentacionJuego(data){
+    console.log(data);
 }
 function parseJSON( json ){
 
@@ -65,7 +55,7 @@ function parseJSON( json ){
 function hearMulticast(multicastPort){
     var dgram = require('dgram');
     var socket = dgram.createSocket('udp4');
-    var PORT = multicastPort;
+    var PORT = portmulticast;
     socket.bind(PORT,'0.0.0.0',function(){
         socket.setBroadcast(true);
         socket.setTTL(1);
@@ -73,9 +63,7 @@ function hearMulticast(multicastPort){
     });
 
     socket.on('message',function(message,rinfo){
-
        var data = parseJSON(message);
-       console.log(data);
        handleData(data);
 
     });
