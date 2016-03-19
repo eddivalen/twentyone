@@ -6,8 +6,9 @@ $('#submit').on('click',function(ev){
 	var ipmulticast = $('#ipmulticast');
 	var portmulticast = $('#portmulticast');
 	var tiempo = $('#tiempo');
+	var espacios = $('#espacios');
 	if(udp.val() === '' || tcp.val() === '' || ipbroadcast.val() === '' ||
-		ipmulticast.val() === '' || portmulticast.val() === '' || tiempo.val() === ''){
+		ipmulticast.val() === '' || portmulticast.val() === '' || tiempo.val() === '' || espacios.val() === ''){
 		alert('No puede dejar un campo vacío');
 	}else{
 		global.infoGame.udp					= Number($("#udp").val());
@@ -16,8 +17,7 @@ $('#submit').on('click',function(ev){
 		global.infoGame.ipmulticast			= $('#ipmulticast').val();
 		global.infoGame.portmulticast		= Number($('#portmulticast').val());
 		global.infoGame.tiempo				= Number($('#tiempo').val());
-		global.infoGame.espacios = 1;
-		console.log(global.infoGame);
+		global.infoGame.espacios  			= Number($('#espacios').val());
 		window.location.href = '../html/index.html';
 	}
 });

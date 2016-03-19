@@ -31,7 +31,11 @@ announceRoom(global.infoGame.roomNames,global.infoGame.tiempo,cantidad_jug,globa
             'tiempo': global.infoGame.tiempo,
             'espacios': space
         };
-        global.infoGame.tiempo = global.infoGame.tiempo-1;
+        if(global.infoGame.tiempo>0){
+            global.infoGame.tiempo = global.infoGame.tiempo-1;
+        }else{
+            global.infoGame.tiempo = 120;
+        }
                 network.serverUDP(message,port);
         }, 1000);
         var data = {
@@ -68,6 +72,14 @@ announceRoom(global.infoGame.roomNames,global.infoGame.tiempo,cantidad_jug,globa
             var index = users.indexOf(user);
             users.splice(index, 1);
         });
+        client.on('error', function(err){
+        if (err.code == 'ECONNRESET') { 
+            console.log('Un cliente ha dejado la sala.');
+            //console.log(client.remoteAddress);
+            client.destroy();
+        }
+    });
+
     });
     server.listen(port,function(){
         console.log('Server listening');

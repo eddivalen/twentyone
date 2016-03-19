@@ -5,6 +5,6 @@ if (typeof(global.infoGame) === 'undefined') {
     global.infoGame.ipbroadcast = '192.168.1.255';//10.0.255.255
     global.infoGame.ipmulticast = '239.1.2.3';
     global.infoGame.portmulticast ='5551';
-    global.infoGame.tiempo = '60';
+    global.infoGame.tiempo = '10';
     global.infoGame.espacios='1';
 }
