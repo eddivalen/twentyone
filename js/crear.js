@@ -4,7 +4,6 @@ var espacios;
 var intervalToAnnounce;
 var port = global.infoGame.udp;  
 
-
 $('#crearSala').on('click',function( ev ){
     ev.preventDefault();
     var element = $('#NomSala');
@@ -21,26 +20,3 @@ $('#crearSala').on('click',function( ev ){
         window.location.href = "../html/servidor.html";
     }
 });
-<<<<<<< HEAD
-=======
-/*
-var crear = {
-    announceRoom : function(room, time, space, port){
-        var message = {
-            'codigo': 1,
-            'nombre': room,
-            'tiempo': time,
-            'espacios': space
-        };
-        console.log('espacios:'+message.espacios);
-        intervalToAnnounce = setInterval(function(){
-                network.serverUDP(message,port);
-        }, 1000*global.infoGame.tiempo);
-        var data = {
-            type: 'alert-success',
-            message: 'El servidor se esta Anunciando.',
-            description: 'En el puerto: ' + port
-        };
-    }
-};*/
->>>>>>> origin/master

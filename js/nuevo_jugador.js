@@ -13,6 +13,6 @@ $('#unirJugador').on('click',function( ev ){
         global.infoGame.playerName = playerName;
         console.log(global.infoGame);
         console.log(playerName);
-        window.location.href = "../html/unirse.html";
+        window.location.href = "../html/jugarCliente.html";
     }
 });

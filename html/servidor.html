@@ -19,8 +19,32 @@
           <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons"></i></a>
       </div>
     </nav>
-
-    <div class="container">
+    
+      <!---OCULTO -->
+    <div class="container img_juego hide" id="imagen_oculta">
+      <div id="juego">
+        <div id="dealer">
+          <div class="carta" id="mano_d"></div>  
+        </div>
+        <div id="jugador">
+          <div class="carta" id="mano_j"></div>  
+        </div>
+        <div class="" id="dinero">
+          <div class="" id="total_dinero"></div>
+          <div class="" id="ganancia"></div>
+        </div>
+      </div>
+    </div>
+    <div class="row center hide" id="btn_oculta">
+      <button id="repartir" class="btn waves-effect waves-light red" type="submit" name="action">Iniciar
+      </button>
+      <button id="pedir" class="btn waves-effect waves-light red" type="submit" name="action">Pedir
+      </button>
+      <button id="repartir" class="btn waves-effect waves-light red" type="submit" name="action">Quedarse
+      </button>
+    </div>
+    <!-- OCULTO-->
+    <div class="container" id="ocultar">
       <div class="row center">
           <form >
             <div class="row">
@@ -35,7 +59,7 @@
       </div>
     </div>
 
-    <div class="container">
+    <div class="container" id="ocultar2">
       <div class="row" style="border-bottom: 2px solid rgba(0,0,0,0.2);">
         <div class="col s5">
           <h5>IP</h5>
